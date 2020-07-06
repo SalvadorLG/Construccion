@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: #90F6FF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.CorteCajaController">
+   <children>
+      <Label layoutX="669.0" layoutY="53.0" prefHeight="25.0" prefWidth="73.0" text="Fecha:">
+         <font>
+            <Font name="Tahoma Bold" size="22.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="fecha" disable="true" layoutX="760.0" layoutY="44.0" maxWidth="196.0" minWidth="196.0" prefHeight="36.0" prefWidth="196.0">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></JFXTextField>
+      <Label layoutX="594.0" layoutY="101.0" text="Ingreso del dia:">
+         <font>
+            <Font name="Tahoma Bold" size="22.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="ingresoDia" disable="true" layoutX="759.0" layoutY="93.0">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></JFXTextField>
+      <Label layoutX="386.0" layoutY="878.0" text="Ganacia del dia:">
+         <font>
+            <Font name="Tahoma Bold" size="21.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="totalGanancias" disable="true" layoutX="567.0" layoutY="869.0">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></JFXTextField>
+      <JFXButton fx:id="regresar" layoutX="72.0" layoutY="801.0" prefHeight="81.0" prefWidth="208.0" text="Regresar">
+         <font>
+            <Font name="Tahoma Bold" size="21.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="58.0" fitWidth="61.0">
+               <image>
+                  <Image url="@../../../../../../AppData/Local/Temp/icons8_back_to_100px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <TableView fx:id="ingresos" layoutX="14.0" layoutY="345.0" prefHeight="376.0" prefWidth="1000.0" style="-fx-background-color: A3E5FF; -fx-border-color: black;" AnchorPane.leftAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="ingreso" prefWidth="500.0" style="-fx-background-color: A3E5FF; -fx-border-color: black;" text="Ingreso" />
+          <TableColumn fx:id="salida" minWidth="0.0" prefWidth="499.0" style="-fx-background-color: A3E5FF; -fx-border-color: black;" text="Salida" />
+        </columns>
+      </TableView>
+      <Label fx:id="flujo" layoutX="411.0" layoutY="268.0" text="Flujo de Caja" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="380.0" layoutY="784.0" text="Total de salidas:">
+         <font>
+            <Font name="Tahoma Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="374.0" layoutY="741.0" text="Total de Ingresos:">
+         <font>
+            <Font name="Tahoma Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="380.0" layoutY="830.0" text="Total de ganancias:">
+         <font>
+            <Font name="Tahoma Bold" size="21.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="totGan" disable="true" layoutX="594.0" layoutY="819.0">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="totSalida" disable="true" layoutX="567.0" layoutY="779.0">
+         <font>
+            <Font name="Tahoma Bold" size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="totIng" disable="true" layoutX="567.0" layoutY="732.0">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>

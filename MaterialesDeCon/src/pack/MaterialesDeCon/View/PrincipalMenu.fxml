@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.PrincipalMenuController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="66.0" layoutY="87.0" prefHeight="700.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: White;">
+               <children>
+                  <Label layoutX="76.0" layoutY="39.0" text="DeCon">
+                     <font>
+                        <Font name="Broadway" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="63.0" layoutY="67.0" text="Decoración &amp; Construcción ">
+                     <font>
+                        <Font name="Bold Italic Art" size="14.0" />
+                     </font>
+                  </Label>
+                  <Ellipse fill="#1f93ff00" layoutX="134.0" layoutY="73.0" radiusX="108.0" radiusY="51.0" strokeType="INSIDE">
+                     <stroke>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </stroke>
+                  </Ellipse>
+                  <VBox layoutX="26.0" layoutY="170.0" prefHeight="486.0" prefWidth="231.0" spacing="50.0">
+                     <children>
+                        <JFXButton fx:id="productos" buttonType="RAISED" mnemonicParsing="false" onAction="#cagarProductos" prefHeight="55.0" prefWidth="232.0" ripplerFill="#f87d7d" text="Productos">
+                           <font>
+                              <Font name="Tahoma Bold" size="23.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" onAction="#cagarCaja" prefHeight="47.0" prefWidth="233.0" ripplerFill="#1039da" text="Venta">
+                           <font>
+                              <Font name="Tahoma Bold" size="23.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" onAction="#cagarProveedores" prefHeight="64.0" prefWidth="256.0" ripplerFill="#4be38a" text="Proveedores">
+                           <font>
+                              <Font name="Tahoma Bold" size="23.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="inventario" buttonType="RAISED" onAction="#cagarListaMateriales" prefHeight="64.0" prefWidth="226.0" ripplerFill="#770ad7" text="Inventario">
+                           <font>
+                              <Font name="Tahoma Bold" size="23.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="369.0">
+               <children>
+                  <AnchorPane layoutX="164.0" layoutY="1.0" prefHeight="55.0" prefWidth="626.0" style="-fx-background-color: #41BAF8;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0">
+                     <children>
+                        <JFXButton fx:id="usuario" layoutX="512.0" layoutY="14.0" onAction="#cagarMenuUsuario" text="Usuario">
+                           <font>
+                              <Font name="Tahoma" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="37.0">
+                                 
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="registroProducto" layoutX="295.0" layoutY="12.0" onAction="#cagarRegisProduc" text="Registrar Producto" visible="false">
+                           <font>
+                              <Font name="Tahoma" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="39.0" fitWidth="44.0">
+                                 
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children></AnchorPane>
+                  <AnchorPane fx:id="userPane" layoutX="89.0" layoutY="217.0" visible="false">
+                     <children>
+                        <JFXButton fx:id="infoUser" contentDisplay="TOP" layoutX="265.0" onAction="#showUserInfo" text="Información del usuario" visible="false">
+                           <font>
+                              <Font name="Tahoma Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView>
+                           
+                        </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="regisUser" contentDisplay="TOP" onAction="#cargarRegistroUsuario" text="Registrar nuevo usuario" visible="false">
+                           <font>
+                              <Font name="Tahoma Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView>
+
+                        </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="materialesPane" layoutX="74.0" layoutY="78.0">
+                     <children>
+                        <GridPane layoutX="-11.0" layoutY="14.0" prefHeight="582.0" prefWidth="512.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXButton fx:id="cemento" alignment="BOTTOM_CENTER" contentDisplay="TOP" onAction="#cagarListaMateriales" prefHeight="151.0" prefWidth="183.0" text="Cemento">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="31.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="145.0" fitWidth="148.0">
+                                       <image>
+                                          <Image url="@../../../imagenes/cemento.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="lamina" contentDisplay="TOP" onAction="#cagarListaMateriales" text="Lamina" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="134.0" fitWidth="79.0">
+                                       <image>
+                                          <Image url="@../../../imagenes/lamina.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="Tahoma Bold" size="31.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="madera" contentDisplay="TOP" onAction="#cagarListaMateriales" prefHeight="115.0" prefWidth="167.0" text="Madera" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="31.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="129.0" fitWidth="131.0">
+                                       <image>
+                                          <Image url="@../../../imagenes/madera.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="pintura" contentDisplay="TOP" onAction="#cagarListaMateriales" text="Pintura" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="31.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="183.0" fitWidth="166.0">
+                                       <image>
+                                          <Image url="@../../../imagenes/pintura.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="acero" contentDisplay="TOP" onAction="#cagarListaMateriales" prefHeight="199.0" prefWidth="243.0" text="Acero" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="31.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="129.0" fitWidth="131.0">
+                                       <image>
+                                          <Image url="@../../../imagenes/acero.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="azulejo" contentDisplay="TOP" onDragDetected="#cagarListaMateriales" text="Azulejo" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="133.0" fitWidth="179.0">
+                                       <image>
+                                          <Image url="@../../../imagenes/azulejo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="Tahoma Bold" size="31.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="ventaPane" layoutX="13.0" layoutY="302.0" visible="false">
+                     <children>
+                        <JFXButton fx:id="compra" onAction="#cargarVenta" text="Realizar Compra" visible="false">
+                           <graphic>
+                              <ImageView>
+                           
+                        </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Tahoma Bold" size="21.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="caja" layoutX="351.0" onAction="#cargarCaja" text="Ver Caja" visible="false">
+                           <graphic>
+                              <ImageView>
+                          
+                        </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Tahoma Bold" size="21.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="provedoresPane" layoutX="89.0" layoutY="192.0" visible="false">
+                     <children>
+                        <JFXButton fx:id="regSuppiler" layoutX="4.0" layoutY="196.0" onAction="#cargarRegistroProveedor" text="Registrar un Nuevo Proveerdor" visible="false">
+                           <graphic>
+                              <ImageView>
+                           
+                        </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Tahoma Bold" size="21.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="seeSuppiler" onAction="#cargarListaProveedores" text="Ver Lista de Proveedores" visible="false">
+                           <graphic>
+                              <ImageView fitHeight="98.0" fitWidth="102.0">
+                                                   </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Tahoma Bold" size="21.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="showUserInfoPane" layoutY="64.0" prefHeight="575.0" prefWidth="626.0" visible="false">
+                     <children>
+                        <VBox layoutX="114.0" layoutY="38.0" prefHeight="436.0" prefWidth="420.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="150.0">
+                                 <image>
+                                    <Image url="@../../../imagenes/avatar.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                                 <children>
+                                    <Label text="Nombre:" />
+                                    <Label fx:id="nombreUsuarioLabel" text="Nombre del usuario" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                                 <children>
+                                    <Label text="Apellido:" />
+                                    <Label fx:id="apellidoUsuarioLabel" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                                 <children>
+                                    <Label text="Puesto:" />
+                                    <Label fx:id="puestoLabel" text="Nombre:" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <JFXButton layoutX="452.0" layoutY="520.0" onAction="#cagarMenuUsuario" text="Regresar">
+                           <graphic>
+                              <ImageView fitHeight="62.0" fitWidth="82.0" onDragDetected="#cagarMenuUsuario" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../imagenes/salir.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="addUserPane" prefHeight="635.0" prefWidth="626.0" visible="false">
+                     <children>
+                        <Label layoutX="148.0" layoutY="101.0" text="Registro de usuario">
+                           <font>
+                              <Font name="Arial Black" size="37.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="114.0" layoutY="182.0" prefHeight="338.0" prefWidth="420.0" spacing="30.0">
+                           <children>
+                              <JFXTextField fx:id="campoNombre" promptText="Nombre" />
+                              <JFXTextField fx:id="campoApellido" promptText="Apellido" />
+                              <JFXTextField fx:id="campoPuesto" promptText="Apellidos" text="Puesto" />
+                              <JFXPasswordField fx:id="campoPassword" promptText="Contraseña" />
+                              <JFXPasswordField fx:id="campoPassword2" promptText="Repetir contraseña" />
+                           </children>
+                        </VBox>
+                        <HBox layoutX="104.0" layoutY="508.0" prefHeight="86.0" prefWidth="432.0" spacing="100.0">
+                           <children>
+                              <JFXButton buttonType="RAISED" onAction="#registrarUsuario" prefHeight="55.0" prefWidth="121.0" ripplerFill="#77bf2b" style="-fx-background-color: #94d49e; -fx-border-radius: 200px;" text="Registrar" textOverrun="CLIP" />
+                              <JFXButton onAction="#cagarMenuUsuario" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: coral; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="addProveedorPane" layoutX="10.0" layoutY="10.0" prefHeight="635.0" prefWidth="626.0" visible="false">
+                     <children>
+                        <Label layoutX="62.0" layoutY="77.0" text="Registro de Proveedor">
+                           <font>
+                              <Font name="Arial Black" size="37.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="114.0" layoutY="152.0" prefHeight="297.0" prefWidth="420.0" spacing="30.0">
+                           <children>
+                              <JFXTextField fx:id="campoId" promptText="Id" />
+                              <JFXTextField fx:id="campoContactoReferencia" promptText="Contacto de Referencia" />
+                              <JFXTextField fx:id="campoEmpresa" promptText="Empresa" />
+                              <JFXTextField fx:id="campoDireccion" promptText="Direccion" />
+                              <JFXTextField fx:id="campoTelefono" promptText="Telefono de la Empresa" />
+                              <JFXTextField fx:id="campoCodPostal" promptText="Codigo Postal" />
+                              <JFXTextField fx:id="campoCiudad" promptText="Ciudad" />
+                           </children>
+                        </VBox>
+                        <HBox layoutX="108.0" layoutY="549.0" prefHeight="86.0" prefWidth="432.0" spacing="100.0">
+                           <children>
+                              <JFXButton buttonType="RAISED" onAction="#registrarProveedor" prefHeight="55.0" prefWidth="121.0" ripplerFill="#77bf2b" style="-fx-background-color: #94d49e; -fx-border-radius: 200px;" text="Registrar" textOverrun="CLIP" />
+                              <JFXButton prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: coral; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
