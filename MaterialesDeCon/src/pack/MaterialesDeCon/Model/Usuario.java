@@ -4,16 +4,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Usuario {
-	private final StringProperty nombre;
 	private final StringProperty idUsuario;
+	private final StringProperty nombre;
 	private final StringProperty apellidoPaterno;
 	private final StringProperty puesto;
+	private StringProperty password;
 	
-	public Usuario(String nombre, String idUsuario, String apellidoPaterno, String puesto) {
-		this.nombre= new SimpleStringProperty(nombre);
+	public Usuario(String idUsuario, String nombre, String apellidoPaterno, String puesto, String password) {
 		this.idUsuario= new SimpleStringProperty(idUsuario);
+		this.nombre= new SimpleStringProperty(nombre);
 		this.apellidoPaterno= new SimpleStringProperty(apellidoPaterno);
 		this.puesto= new SimpleStringProperty(puesto);
+		this.password = new SimpleStringProperty(password);
 	}
 	
 	public StringProperty getNombre() {
@@ -61,7 +63,19 @@ public class Usuario {
 	}
 	
 	public void setIdProducto(String puesto) {
-		this.puesto.set(puesto);;
+		this.puesto.set(puesto);
+	}
+	
+	public StringProperty getPassword() {
+		return password;
+	}
+
+	public String getPasswordProperty() {
+		return password.get();
+	}
+
+	public void setPassword(StringProperty password) {
+		this.password = password;
 	}
 
 }

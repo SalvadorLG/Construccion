@@ -120,8 +120,10 @@ public class ListaProveedoresController {
 			@Override
 			public void changed(ObservableValue<? extends Proveedor> observable, Proveedor oldValue, Proveedor newValue) {
 				// TODO Auto-generated method stub
+				if(newValue != null) {
 					c=newValue.getIdProveedorProperty();
-				
+					System.out.println("id proveedor"+c);
+				}
 				
 			}
 		});
@@ -133,7 +135,10 @@ public class ListaProveedoresController {
 		conn = con.getConection();
 		PreparedStatement st = conn.prepareStatement(consulta);
 		st.executeUpdate();
-		
+		c = "";
+		tablaProveedores.getItems().clear();
+		lista.clear();
+		initialize();
 		
 	}
 	public void setMain(Main main) {

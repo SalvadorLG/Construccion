@@ -157,13 +157,13 @@ public class OrdenPedidoController {
 	}
     
     @FXML
-    public void cargarMenu(ActionEvent e) {
+    /*public void cargarMenu(ActionEvent e) {
     	VentaController.carrito().clear();
     	VentaController.subTotal=0;
     	Stage s = (Stage)guardar.getScene().getWindow();
     	s.close();
     	main.loadMenu();
-    }
+    }*/
     
     
     public void setMain(Main main) {

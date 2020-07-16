@@ -27,11 +27,12 @@ public class LoginController {
 	private JFXTextField user;
 	@FXML
 	private JFXPasswordField password;
+	String idUsuario = "", name = "", puesto = "", apellido = "";
 	
 	@FXML
 	void cagarMenu(ActionEvent event) throws SQLException{
 		if(VerificarUser()) {
-			main.loadMenu();
+			main.loadMenu(idUsuario, name, apellido, puesto);
 		}else {
 			   Alert alerta = new Alert(Alert.AlertType.INFORMATION);
 				alerta.setTitle("Advertencia");
@@ -52,7 +53,12 @@ public class LoginController {
 			while (res.next()) {
 				//System.out.println(res.next());
 				String password = res.getString("password");
+				System.out.println(password);
 				if(passwordIngresado.equals(password)) {
+					idUsuario = res.getString("idUsuario");
+					name = res.getString("nombre");
+					apellido = res.getString("apellidoPaterno");
+					puesto = res.getString("puesto");
 					verificar = true;
 				}
 				

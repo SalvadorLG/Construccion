@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -37,6 +38,9 @@ public class PrincipalMenuController implements Initializable{
 
     @FXML
     private JFXButton infoUser;
+    
+    @FXML
+    private JFXButton listUser;
 
     @FXML
     private JFXButton cemento;
@@ -83,6 +87,15 @@ public class PrincipalMenuController implements Initializable{
 
     @FXML
     private JFXPasswordField campoPassword2;
+    
+    @FXML
+    private Label infoName;
+    
+    @FXML
+    private Label infoApellido;
+    
+    @FXML
+    private Label infoPuesto;
  
     //static float cantidadInicial= Float.parseFloat(JOptionPane.showInputDialog(null, "Inserte el ingreso del dia: "));
 	static float cantidadInicial = 0;
@@ -94,9 +107,9 @@ public class PrincipalMenuController implements Initializable{
 	void registrarUsuario(ActionEvent event) throws SQLException {
 		con = Conexion.getConection();
 		String consulta = "INSERT INTO MaterialesDeCon.dbo.Usuario VALUES ('"+campoNombre.getText()+"','"+campoApellido.getText()+
-							"','"+campoPuesto.getText()+"','"+campoPuesto.getText()+"')";
+							"','"+campoPuesto.getText()+"','"+campoPassword.getText()+"')";
 		ps = con.prepareStatement(consulta);
-    	ps.executeQuery();
+    	ps.executeUpdate();
     	System.out.println(ps);
     	Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
 		alerta.setTitle("CONFIRMACIÓN");
@@ -104,21 +117,38 @@ public class PrincipalMenuController implements Initializable{
 		alerta.initStyle(StageStyle.UTILITY);
 		alerta.setHeaderText(null);
 		alerta.showAndWait();
+		verificarBotones();
+		userPane.setVisible(true);
 	}
 	 
 	 @FXML
 	void registrarProveedor(ActionEvent event) throws SQLException {
 		 
 	 }
+	 
+	 @FXML
+	public void regresar(ActionEvent event) {
+		infoName.setText("");
+		infoApellido.setText("");
+		infoPuesto.setText("");
+		verificarBotones();
+		userPane.setVisible(true);
+	}
 	
 	public void cagarMenuUsuario(ActionEvent event) {
 		verificarBotones();
+		if(!main.puesto.equals("admin")) {
+			regisUser.setVisible(false);
+			listUser.setVisible(false);
+		}
 		userPane.setVisible(true);
 	}
 	
 	public void cagarProductos(ActionEvent event) {
 		verificarBotones();
-		registroProducto.setVisible(true);
+		if(main.puesto.equals("admin")) {
+			registroProducto.setVisible(true);
+		}
 		materialesPane.setVisible(true);
 	}
 	
@@ -129,8 +159,12 @@ public class PrincipalMenuController implements Initializable{
 	
 	public void cagarProveedores(ActionEvent event) {
 		verificarBotones();
+		if(!main.puesto.equals("admin")) {
+			regSuppiler.setVisible(false);
+		}
 		provedoresPane.setVisible(true);
 	}
+	
 	@FXML
 	public void cargarRegistroUsuario() {
 		verificarBotones();
@@ -211,10 +245,17 @@ public class PrincipalMenuController implements Initializable{
 	@FXML
 	public void showUserInfo() {
 		verificarBotones();
+		infoName.setText(main.name);
+		infoApellido.setText(main.apellido);
+		infoPuesto.setText(main.puesto);
 		showUserInfoPane.setVisible(true);
+		
 	}
 	
-	
+	@FXML
+	public void showUsers() {
+		main.cargarListaUsuarios();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -243,5 +284,6 @@ public class PrincipalMenuController implements Initializable{
 		seeSuppiler.setVisible(true);
 		regisUser.setVisible(true);
 		infoUser.setVisible(true);
+		listUser.setVisible(true);
 	}
 }

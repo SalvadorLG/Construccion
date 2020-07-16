@@ -11,6 +11,7 @@ import pack.MaterialesDeCon.View.CorteCajaController;
 //import pack.MaterialesDeCon.View.EditarProductoController;
 import pack.MaterialesDeCon.View.ListaProductosController;
 import pack.MaterialesDeCon.View.ListaProveedoresController;
+import pack.MaterialesDeCon.View.ListaUsuariosController;
 import pack.MaterialesDeCon.View.LoginController;
 import pack.MaterialesDeCon.View.OrdenPedidoController;
 import pack.MaterialesDeCon.View.PagoController;
@@ -29,8 +30,10 @@ public class Main extends Application {
 	Stage verVenta= new Stage();
 	Stage verOrdenPedido=new Stage();
 	Stage verPago= new Stage();
+	Stage listaUsuarios = new Stage();
 	public static String categoria = "";
 	public static String nick = "", pass = "";
+	public static String idUsuario = "", name = "", puesto = "", apellido = "";
 
 
 	@Override
@@ -38,9 +41,14 @@ public class Main extends Application {
 		loadLogin();
 	}
 	
-	public void loadMenu() {
+	public void loadMenu(String idUsuario, String name,String apellido,String puesto) {
 		try {
 			login.close();
+			this.idUsuario = idUsuario;
+			this.name = name;
+			this.apellido = apellido;
+			this.puesto = puesto;
+			
 			FXMLLoader loader= new FXMLLoader(Main.class.getResource("View/PrincipalMenu.fxml"));
 			AnchorPane root=(AnchorPane)loader.load();
 			Scene scene= new Scene(root);
@@ -124,7 +132,6 @@ public class Main extends Application {
 	
 	public void cargarListaMateriales(String Category) {
 		this.categoria = Category;
-		System.out.println(this.categoria);
 		try {
 			FXMLLoader loader= new FXMLLoader(Main.class.getResource("View/ListaMateriales.fxml"));
 			AnchorPane root=(AnchorPane)loader.load();
@@ -138,6 +145,22 @@ public class Main extends Application {
 		} catch  (IOException e) {
 			e.printStackTrace();
 	}
+	}
+	
+	public void cargarListaUsuarios() {
+		try {
+			FXMLLoader loader= new FXMLLoader(Main.class.getResource("View/ListaUsuarios.fxml"));
+			AnchorPane root=(AnchorPane)loader.load();
+			Scene scene= new Scene(root);
+			ListaUsuariosController controlador= loader.getController();
+			controlador.setMain(this);
+			listaUsuarios.setScene(scene);
+			listaUsuarios.show();
+			
+		} catch  (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void cargarVenta() {

@@ -134,6 +134,14 @@ public class ListaProductosController {
 		});
 	}
 	
+	@FXML
+	public void agregarProducto() {
+		main.cagarRegistroProducto();
+		System.out.println("Espero tiempo");
+		Stage s = (Stage)salir.getScene().getWindow();
+    	s.close();
+	}
+	
 	public void editar() throws SQLException{
 		String consulta = "update dbo.Producto set nombreProducto = '"+"', idProveerdor = '"+"', idCategoria = '"+"', precioUnitario = '"+"', existencia='"+"' where idProducto='"+"';";
 		conn = con.getConection();

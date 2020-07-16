@@ -25,7 +25,7 @@
             <TableColumn fx:id="proveedor" prefWidth="235.0" style="-fx-background-color: lightblue;" text="Proveedor" />
         </columns>
       </TableView>
-      <HBox layoutX="375.0" layoutY="603.0" prefHeight="83.0" prefWidth="611.0" spacing="20.0">
+      <HBox layoutX="95.0" layoutY="599.0" prefHeight="94.0" prefWidth="891.0" spacing="20.0">
          <children>
             <JFXButton fx:id="eliminar" onAction="#iniciar" text="Eliminar">
                <font>
@@ -63,6 +63,18 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <JFXButton onAction="#agregarProducto" text="Agregar">
+               <font>
+                  <Font name="Tahoma Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="67.0">
+                     <image>
+                        <Image url="@../../../../../../../respaldo/construccion/Materiales%20DeCon/src/imagenes/agregar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </HBox>
       <Label layoutX="414.0" layoutY="26.0" text="DeCon">
@@ -85,10 +97,5 @@
             </LinearGradient>
          </stroke>
       </Ellipse>
-      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="349.0" layoutY="14.0">
-         <image>
-            <Image url="@../../../../../../AppData/Local/Temp/icons8_hammer_96px_1.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

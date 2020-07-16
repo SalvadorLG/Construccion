@@ -92,6 +92,7 @@ public class RegistroProductoController implements Initializable{
 			alerta.initStyle(StageStyle.UTILITY);
 			alerta.setHeaderText(null);
 			alerta.showAndWait();
+			main.cargarListaMateriales("inventario");
     	}else {
     		Alert alerta = new Alert(Alert.AlertType.ERROR);
 			alerta.setTitle("Error");

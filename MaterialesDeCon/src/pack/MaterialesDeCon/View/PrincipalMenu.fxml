@@ -110,29 +110,37 @@
                      </children></AnchorPane>
                   <AnchorPane fx:id="userPane" layoutX="89.0" layoutY="217.0" visible="false">
                      <children>
-                        <JFXButton fx:id="infoUser" contentDisplay="TOP" layoutX="265.0" onAction="#showUserInfo" text="Información del usuario" visible="false">
-                           <font>
-                              <Font name="Tahoma Bold" size="15.0" />
-                           </font>
-                           <graphic>
-                              <ImageView>
-                           
-                        </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="regisUser" contentDisplay="TOP" onAction="#cargarRegistroUsuario" text="Registrar nuevo usuario" visible="false">
-                           <font>
-                              <Font name="Tahoma Bold" size="15.0" />
-                           </font>
-                           <graphic>
-                              <ImageView>
-
-                        </ImageView>
-                           </graphic>
-                        </JFXButton>
+                        <VBox prefHeight="209.0" prefWidth="339.0" spacing="30.0">
+                           <children>
+                              <JFXButton fx:id="regisUser" contentDisplay="TOP" onAction="#cargarRegistroUsuario" text="Registrar nuevo usuario">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="infoUser" contentDisplay="TOP" onAction="#showUserInfo" text="Información del usuario">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="listUser" contentDisplay="TOP" onAction="#showUsers" text="Lista de usuarios">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="materialesPane" layoutX="74.0" layoutY="78.0">
+                  <AnchorPane fx:id="materialesPane" layoutX="74.0" layoutY="78.0" visible="false">
                      <children>
                         <GridPane layoutX="-11.0" layoutY="14.0" prefHeight="582.0" prefWidth="512.0">
                           <columnConstraints>
@@ -280,24 +288,24 @@
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                                  <children>
                                     <Label text="Nombre:" />
-                                    <Label fx:id="nombreUsuarioLabel" text="Nombre del usuario" />
+                                    <Label fx:id="infoName" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                                  <children>
                                     <Label text="Apellido:" />
-                                    <Label fx:id="apellidoUsuarioLabel" />
+                                    <Label fx:id="infoApellido" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                                  <children>
                                     <Label text="Puesto:" />
-                                    <Label fx:id="puestoLabel" text="Nombre:" />
+                                    <Label fx:id="infoPuesto" />
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
-                        <JFXButton layoutX="452.0" layoutY="520.0" onAction="#cagarMenuUsuario" text="Regresar">
+                        <JFXButton layoutX="452.0" layoutY="520.0" onAction="#regresar" text="Regresar">
                            <graphic>
                               <ImageView fitHeight="62.0" fitWidth="82.0" onDragDetected="#cagarMenuUsuario" pickOnBounds="true" preserveRatio="true">
                                  <image>
