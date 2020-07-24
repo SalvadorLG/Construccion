@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -26,6 +26,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pack.MaterialesDeCon.Main;
 import pack.MaterialesDeCon.Model.Conexion;
 import pack.MaterialesDeCon.Model.Proveedor;
@@ -33,9 +34,10 @@ import pack.MaterialesDeCon.Model.Proveedor;
 public class ListaProveedoresController {
 	ObservableList<Proveedor> lista = FXCollections.observableArrayList();
 	Main main;
-	Connection conn=null;
-    Conexion con = new Conexion();
+	Connection con=null;
+    private PreparedStatement ps;
     Proveedor proveedorsito;
+    ArrayList<ArrayList<String>> listaProveedores = new ArrayList<ArrayList<String>>();
     
     @FXML
     private AnchorPane listaPane, editProveedorPane; 
@@ -74,8 +76,27 @@ public class ListaProveedoresController {
     @FXML
     private JFXButton salir;
     
+    @FXML
+    private JFXTextField editContacto;
+
+    @FXML
+    private JFXTextField editEmpresa;
+
+    @FXML
+    private JFXTextField editDireccion;
+
+    @FXML
+    private JFXTextField editTelefonoEmpresa;
+
+    @FXML
+    private JFXTextField editCiudad;
+
+    @FXML
+    private JFXTextField editCodigo;
+    
     static String c;
     
+    String idProv = "";
  
     @FXML
 	public void initialize() throws SQLException {
@@ -101,11 +122,10 @@ public class ListaProveedoresController {
 	
 	public void select() throws SQLException {
 		String consulta = "select * from MaterialesDeCon.dbo.Proveerdor";
-		conn = con.getConection();
-		Statement st = conn.createStatement();
+		con = Conexion.getConection();
+		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(consulta);
 		while(rs.next()) {
-			//System.out.println(rs.getString(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+"-"+rs.getString(4)+"-"+rs.getString(5)+"-"+rs.getString(6)+"-"+rs.getString(7));
 			lista.add(new Proveedor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
 		}
 	}
@@ -120,11 +140,19 @@ public class ListaProveedoresController {
 			@Override
 			public void changed(ObservableValue<? extends Proveedor> observable, Proveedor oldValue, Proveedor newValue) {
 				// TODO Auto-generated method stub
+				ArrayList<String> listTemp = new ArrayList<String>();
 				if(newValue != null) {
-					c=newValue.getIdProveedorProperty();
-					System.out.println("id proveedor"+c);
+					listaProveedores.clear();
+					listTemp.clear();
+					listTemp.add(newValue.getIdProveedorProperty());
+					listTemp.add(newValue.getContactoReferenciaProperty());
+					listTemp.add(newValue.getNombreEmpresaProperty());
+					listTemp.add(newValue.getDireccionProperty());
+					listTemp.add(newValue.getNumeroTelefonicoProperty());
+					listTemp.add(newValue.getCodigoPostalProperty());
+					listTemp.add(newValue.getCiudadProperty());
+					listaProveedores.add(listTemp);
 				}
-				
 			}
 		});
 	}
@@ -132,8 +160,8 @@ public class ListaProveedoresController {
 	
 	public void eliminar() throws SQLException{
 		String consulta = "delete from MaterialesDeCon.dbo.Proveerdor where idProveedor ='"+c+"'";
-		conn = con.getConection();
-		PreparedStatement st = conn.prepareStatement(consulta);
+		con = Conexion.getConection();
+		PreparedStatement st = con.prepareStatement(consulta);
 		st.executeUpdate();
 		c = "";
 		tablaProveedores.getItems().clear();
@@ -151,9 +179,67 @@ public class ListaProveedoresController {
 	}
 	
 	@FXML
+	 public void showEditViewProveedor() {
+		if(!listaProveedores.isEmpty()) {
+			ocultar();
+			editProveedorPane.setVisible(true);
+			//System.out.println(listaProveedores.get(0));
+			idProv = listaProveedores.get(0).get(0);
+			
+			String date02 = listaProveedores.get(0).get(1);
+			String date03 = listaProveedores.get(0).get(2);
+			String date04 = listaProveedores.get(0).get(3);
+			String date05 = listaProveedores.get(0).get(4);
+			String date06 = listaProveedores.get(0).get(5);
+			String date07 = listaProveedores.get(0).get(6);
+			
+			System.out.println(" ID: "+idProv 
+							+ "\n Contacto: " + date02 
+							+ "\n Empresa: " + date03 
+							+ "\n Direccion: " + date04 
+							+ "\n Telefono: " + date05 
+							+ "\n CP: " + date06 
+							+ "\n Ciudad: " + date07);
+			editContacto.setText(date02);
+			editEmpresa.setText(date03);
+			editDireccion.setText(date04);
+			editTelefonoEmpresa.setText(date05);
+			editCodigo.setText(date06);
+			editCiudad.setText(date07);
+		}
+	}
+	
+	@FXML
 	public void editProveedor() {
-		ocultar();
-		editProveedorPane.setVisible(true);
+		
+		String consulta = "update dbo.Proveerdor set contactoReferencia='"+editContacto.getText()+"', "
+						+ "nombreEmpresa='"+editEmpresa.getText()+"', direccion='"+editDireccion.getText()
+						+"', numeroTelefonico='"+editTelefonoEmpresa.getText()+"', codigoPostal='"+editCodigo.getText()+"', "
+						+ "ciudad='"+editCiudad.getText()+"' where idProveedor='"+idProv+"';";
+		try {
+			ps = con.prepareStatement(consulta);
+			ps.executeUpdate();
+			Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+			alerta.setTitle("CONFIRMACIÓN");
+			alerta.setContentText("El proveedor se ha editado");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+			ocultar();
+			listaPane.setVisible(true);
+			tablaProveedores.getItems().clear();
+			lista.clear();
+			initialize();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alerta = new Alert(Alert.AlertType.ERROR);
+			alerta.setTitle("Error");
+			alerta.setContentText("El proveedor no se ha logrado editar");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+		}
 	}
 	
 	public void salir(ActionEvent event) {
@@ -162,36 +248,11 @@ public class ListaProveedoresController {
 	}
 	
 	
-	///// edicion de proveedor
-	
-	@FXML
-    private JFXTextField editEmpresa, editNombreContacto, editTelefonoContacto;
-
-	
-	@FXML
-	public void guardarEdicionProveedor(){
-		String empresa = editEmpresa.getText();
-		String nombre = editNombreContacto.getText();
-		String telefono  = editTelefonoContacto.getText();
-		
-		System.out.println(empresa);
-		System.out.println(nombre);
-		System.out.println(telefono);
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Ã‰xito");
-		alert.setHeaderText(null);
-		alert.setContentText("El proveedor se ha modificado correctamente");
-		alert.showAndWait();
-		
-		ocultar();
-	}
-	
 	@FXML
 	public void cancelar() {
-		editEmpresa.setText("");
-		editNombreContacto.setText("");
-		editTelefonoContacto.setText("");
+		//editEmpresa.setText("");
+		//editNombreContacto.setText("");
+		//editTelefonoContacto.setText("");
 		ocultar();
 		listaPane.setVisible(true);
 	}

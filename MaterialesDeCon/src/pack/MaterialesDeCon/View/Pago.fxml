@@ -3,12 +3,13 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #03BCFF; -fx-border-radius: 90;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.PagoController">
+<AnchorPane prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: A9DFBF; -fx-background-radius: 50;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.PagoController">
    <children>
       <Label layoutX="65.0" layoutY="100.0" text="Paga con:">
          <font>
@@ -27,14 +28,14 @@
          <graphic>
             <ImageView>
                <image>
-                  <Image url="@../../../../../../AppData/Local/Temp/icons8_next_page_26px.png" />
+                  <Image url="@../../../imagenes/next.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
       <ImageView layoutX="420.0" layoutY="5.0">
          <image>
-            <Image url="@../../../../../../AppData/Local/Temp/icons8_money_64px.png" />
+            <Image url="@../../../imagenes/money.png" />
          </image>
       </ImageView>
       <JFXTextField fx:id="tot" disable="true" layoutX="187.0" layoutY="38.0" />
@@ -44,4 +45,7 @@
          </font>
       </Label>
    </children>
+   <effect>
+      <Reflection />
+   </effect>
 </AnchorPane>

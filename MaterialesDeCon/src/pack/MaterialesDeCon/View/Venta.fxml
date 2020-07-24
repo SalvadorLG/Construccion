@@ -9,72 +9,81 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1000.0" style="-fx-background-color: #43F63C;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.VentaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.VentaController">
    <children>
-      <SplitPane dividerPositions="0.6232464929859719" layoutX="145.0" layoutY="232.0" prefHeight="900.0" prefWidth="1000.0" style="-fx-background-color: #43F63C;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.6232464929859719" layoutX="184.0" layoutY="328.0" prefHeight="585.0" prefWidth="858.0" style="-fx-background-color: #43F63C;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="305.0">
                <children>
-                  <TableView fx:id="tablaVenta" layoutY="129.0" onSort="#initialize" prefHeight="769.0" prefWidth="618.0">
+                  <TableView fx:id="tablaVenta" onSort="#initialize" prefHeight="588.0" prefWidth="537.0">
                     <columns>
-                      <TableColumn fx:id="idVenta" prefWidth="131.0" style="-fx-background-color: blue;" text="ID" />
-                      <TableColumn fx:id="nombreVenta" prefWidth="290.0" style="-fx-background-color: red;" text="Nombre" />
-                        <TableColumn fx:id="cantidadVenta" prefWidth="97.0" style="-fx-background-color: purple;" text="Cantidad" />
-                        <TableColumn fx:id="precioVenta" prefWidth="99.0" style="-fx-background-color: yellow;" text="Precio" />
+                      <TableColumn fx:id="idVenta" prefWidth="81.69547200202942" text="ID" />
+                      <TableColumn fx:id="nombreVenta" prefWidth="87.92213439941406" text="Nombre" />
+                        <TableColumn fx:id="cantidadVenta" prefWidth="180.07785034179688" text="Cantidad" />
+                        <TableColumn fx:id="precioVenta" prefWidth="99.0" text="Precio" />
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="492.0" style="-fx-background-color: #196916;">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="492.0" style="-fx-background-color: white;">
                <children>
-                  <JFXButton fx:id="agregar" layoutX="102.0" layoutY="694.0" onAction="#agregarProducto" prefHeight="64.0" prefWidth="146.0" text="Agregar">
-                     <graphic>
-                        <ImageView fitHeight="54.0" fitWidth="59.0">
-                           <image>
-                              <Image url="@../../../../../../AppData/Local/Temp/icons8_open_box_96px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXTextField fx:id="cantidad" layoutX="70.0" layoutY="352.0" promptText="Cantidad">
-                     <font>
-                        <Font name="Tahoma Bold" size="20.0" />
-                     </font></JFXTextField>
-                  <JFXTextField fx:id="nomVenta" disable="true" layoutX="70.0" layoutY="210.0" promptText="Nombre">
-                     <font>
-                        <Font name="Tahoma Bold" size="20.0" />
-                     </font></JFXTextField>
-                  <JFXTextField fx:id="identificador" disable="true" layoutX="70.0" layoutY="288.0" promptText="ID">
-                     <font>
-                        <Font name="Tahoma Bold" size="20.0" />
-                     </font></JFXTextField>
-                  <JFXButton fx:id="finalizar" layoutX="106.0" layoutY="793.0" onAction="#cargarPagoEfec" text="Finalizar">
-                     <graphic>
-                        <ImageView fitHeight="54.0" fitWidth="59.0">
-                           <image>
-                              <Image url="@../../../../../../AppData/Local/Temp/icons8_next_page_512px_1.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                   <Label fx:id="carito" layoutX="195.0" layoutY="24.0" prefHeight="64.0" prefWidth="152.0" textFill="WHITE">
                      <font>
                         <Font name="Tahoma Bold" size="30.0" />
                      </font>
-                     <graphic>
-                        <ImageView fitHeight="64.0" fitWidth="67.0">
-                           <image>
-                              <Image url="@../../../../../../AppData/Local/Temp/icons8_sell_stock_96px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Label>
-                  <JFXTextField fx:id="total" disable="true" layoutX="76.0" layoutY="584.0" promptText="Sub Total:">
-                     <font>
-                        <Font name="Tahoma Bold" size="20.0" />
-                     </font></JFXTextField>
+                  <VBox layoutX="47.0" layoutY="80.0" spacing="15.0">
+                     <children>
+                        <JFXTextField fx:id="nomVenta" disable="true" layoutX="70.0" layoutY="210.0" promptText="Nombre">
+                           <font>
+                              <Font name="Tahoma Bold" size="20.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="identificador" disable="true" layoutX="70.0" layoutY="288.0" promptText="ID">
+                           <font>
+                              <Font name="Tahoma Bold" size="20.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="cantidad" layoutX="70.0" layoutY="352.0" promptText="Cantidad">
+                           <font>
+                              <Font name="Tahoma Bold" size="20.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="37.0" layoutY="314.0" spacing="45.0">
+                     <children>
+                        <JFXTextField fx:id="total" disable="true" layoutX="76.0" layoutY="584.0" promptText="Sub Total:">
+                           <font>
+                              <Font name="Tahoma Bold" size="20.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="agregar" layoutX="106.0" layoutY="694.0" onAction="#agregarProducto" prefHeight="64.0" prefWidth="125.0" text="Agregar">
+                           <graphic>
+                              <ImageView fitHeight="54.0" fitWidth="59.0">
+                                 <image>
+                                    <Image url="@../../../imagenes/agregar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="finalizar" layoutX="106.0" layoutY="793.0" onAction="#cargarPagoEfec" text="Finalizar">
+                           <graphic>
+                              <ImageView fitHeight="54.0" fitWidth="59.0">
+                                 <image>
+                                    <Image url="@../../../imagenes/guardar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
         </items>

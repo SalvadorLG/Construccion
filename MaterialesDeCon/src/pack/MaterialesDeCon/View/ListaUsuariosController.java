@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pack.MaterialesDeCon.Main;
 import pack.MaterialesDeCon.Model.Conexion;
 import pack.MaterialesDeCon.Model.Producto;
@@ -33,12 +34,12 @@ import pack.MaterialesDeCon.Model.Usuario;
 public class ListaUsuariosController {
 	ObservableList<Usuario> lista = FXCollections.observableArrayList();
 	Main main;
-	Connection conn=null;
-    Conexion con = new Conexion();
+	Connection con=null;
+    private PreparedStatement ps;
     Usuario usuario;
     
     @FXML
-    private AnchorPane listaPane, editUserPane; 
+    private AnchorPane listaUserPane, editUserPane; 
     
     @FXML
     private TableView<Usuario> tablaUsuarios;
@@ -68,6 +69,13 @@ public class ListaUsuariosController {
     
     static String c;
     
+    ArrayList<ArrayList<String>> listaUsuarios = new ArrayList<ArrayList<String>>();
+    
+    String idUser = "";
+    
+    @FXML
+    private JFXTextField editNombre, editApellidos, editPuesto;
+    
  
     @FXML
 	public void initialize() throws SQLException {
@@ -77,7 +85,7 @@ public class ListaUsuariosController {
 		tableNombre.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getNombreProperty()));
 		tableApellidos.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getApellidoPaternoProperty()));
 		tablePuesto.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getPuestoProperty()));
-		listaPane.setVisible(true);		
+		listaUserPane.setVisible(true);		
 		seleccion();	
 	}
     
@@ -88,8 +96,8 @@ public class ListaUsuariosController {
 	
 	public void select() throws SQLException {
 		String consulta = "select * from MaterialesDeCon.dbo.Usuario";
-		conn = con.getConection();
-		Statement st = conn.createStatement();
+		con = Conexion.getConection();
+		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(consulta);
 		while(rs.next()) {
 			lista.add(new Usuario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
@@ -105,12 +113,15 @@ public class ListaUsuariosController {
 
 			@Override
 			public void changed(ObservableValue<? extends Usuario> observable, Usuario oldValue, Usuario newValue) {
-				// TODO Auto-generated method stub
+				ArrayList<String> listTemp = new ArrayList<String>();
 				if(newValue != null) {
-					c=newValue.getIdUsuarioProperty();
-					System.out.println(newValue.getNombreProperty());
-					System.out.println(newValue.getApellidoPaternoProperty());
-					System.out.println(newValue.getPuestoProperty());
+					listaUsuarios.clear();
+					listTemp.clear();
+					listTemp.add(newValue.getIdUsuarioProperty());
+					listTemp.add(newValue.getNombreProperty());
+					listTemp.add(newValue.getApellidoPaternoProperty());
+					listTemp.add(newValue.getPuestoProperty());
+					listaUsuarios.add(listTemp);
 				}	
 			}
 		});
@@ -119,8 +130,8 @@ public class ListaUsuariosController {
 	
 	public void eliminar() throws SQLException{
 		String consulta = "delete from MaterialesDeCon.dbo.Usuario where idUsuario ='"+c+"'";
-		conn = con.getConection();
-		PreparedStatement st = conn.prepareStatement(consulta);
+		con = Conexion.getConection();
+		PreparedStatement st = con.prepareStatement(consulta);
 		st.executeUpdate();
 		c = "";
 		tablaUsuarios.getItems().clear();
@@ -132,14 +143,30 @@ public class ListaUsuariosController {
 	}
 	
 	private void ocultar() {
-		listaPane.setVisible(false);
+		listaUserPane.setVisible(false);
 		editUserPane.setVisible(false);
 	}
 	
 	@FXML
-	public void editProveedor() {
-		ocultar();
-		editUserPane.setVisible(true);
+	public void ShowViewEditUser() {
+		if(!listaUsuarios.isEmpty()) {
+			ocultar();
+			editUserPane.setVisible(true);
+			idUser = listaUsuarios.get(0).get(0);
+			
+			String date02 = listaUsuarios.get(0).get(1);
+			String date03 = listaUsuarios.get(0).get(2);
+			String date04 = listaUsuarios.get(0).get(3);
+			
+			System.out.println(" ID: "+idUser 
+					+ "\n Nombre: " + date02 
+					+ "\n Apellidos: " + date03 
+					+ "\n Puesto: " + date04);
+			
+			editNombre.setText(date02);
+			editApellidos.setText(date03);
+			editPuesto.setText(date04);
+		}
 	}
 	
 	@FXML
@@ -148,39 +175,44 @@ public class ListaUsuariosController {
     	s.close();
 	}
 	
-	///// edicion de Usuario
-	
-	@FXML
-    private JFXTextField editNombre, editApellidos, editPuesto;
-
-	
 	@FXML
 	public void guardarEdicionUsuario(){
-		String nombre = editNombre.getText();
-		String apellidos = editApellidos.getText();
-		String puesto  = editPuesto.getText();
-		
-		System.out.println(nombre);
-		System.out.println(apellidos);
-		System.out.println(puesto);
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Ã‰xito");
-		alert.setHeaderText(null);
-		alert.setContentText("El Usuario se ha modificado correctamente");
-		alert.showAndWait();
-		
-		ocultar();
-		listaPane.setVisible(true);
+		String consulta = "update dbo.Usuario set nombre='"+editNombre.getText()+"', "
+				+ "apellidoPaterno='"+editApellidos.getText()+"', puesto='"+editPuesto.getText()
+				+"' where idUsuario='"+idUser+"';";
+		try {
+			ps = con.prepareStatement(consulta);
+			ps.executeUpdate();
+			Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+			alerta.setTitle("CONFIRMACIÓN");
+			alerta.setContentText("El Usuario se ha editado");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+			ocultar();
+			listaUserPane.setVisible(true);
+			tablaUsuarios.getItems().clear();
+			lista.clear();
+			initialize();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alerta = new Alert(Alert.AlertType.ERROR);
+			alerta.setTitle("Error");
+			alerta.setContentText("El usuario no se ha logrado editar");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+		}
 	}
 	
 	@FXML
 	public void cancelar() {
-		editNombre.setText("");
-		editApellidos.setText("");
-		editPuesto.setText("");
+		//editNombre.setText("");
+		//editApellidos.setText("");
+		//editPuesto.setText("");
 		ocultar();
-		listaPane.setVisible(true);
+		listaUserPane.setVisible(true);
 	}
 }
 	

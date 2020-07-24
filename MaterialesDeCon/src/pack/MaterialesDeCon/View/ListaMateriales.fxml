@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Ellipse?>
@@ -15,87 +18,115 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.ListaProductosController">
    <children>
-      <TableView fx:id="tablaProductos" layoutY="103.0" prefHeight="494.0" prefWidth="1000.0" style="-fx-border-color: #F4FF00;">
-        <columns>
-          <TableColumn fx:id="idCategoria" prefWidth="89.0" style="-fx-background-color: lightblue;" text="ID" />
-          <TableColumn fx:id="nombreProducto" prefWidth="317.0" style="-fx-background-color: lightblue;" text="Nombre" />
-            <TableColumn fx:id="categoriaProducto" prefWidth="146.0" style="-fx-background-color: lightblue;" text="Categoria" />
-            <TableColumn fx:id="price" prefWidth="116.0" style="-fx-background-color: lightblue;" text="Precio Unitario" />
-            <TableColumn fx:id="existencia" prefWidth="96.0" style="-fx-background-color: lightblue;" text="Existencia" />
-            <TableColumn fx:id="proveedor" prefWidth="235.0" style="-fx-background-color: lightblue;" text="Proveedor" />
-        </columns>
-      </TableView>
-      <HBox layoutX="95.0" layoutY="599.0" prefHeight="94.0" prefWidth="891.0" spacing="20.0">
+      <AnchorPane fx:id="materialesPane" layoutY="8.0">
          <children>
-            <JFXButton fx:id="eliminar" onAction="#iniciar" text="Eliminar">
+            <Ellipse fill="#1f93ff00" layoutX="467.0" layoutY="40.0" radiusX="108.0" radiusY="47.0" strokeType="INSIDE">
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </Ellipse>
+            <Label layoutX="414.0" layoutY="18.0" text="DeCon">
                <font>
-                  <Font name="Tahoma Bold" size="20.0" />
+                  <Font name="Broadway" size="33.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="67.0">
-                     <image>
-                        <Image url="@../../../imagenes/eliminar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="modificar" text="Modificar">
+            </Label>
+            <Label layoutX="386.0" layoutY="40.0" text="Decoración &amp; Construcción ">
                <font>
-                  <Font name="Tahoma Bold" size="20.0" />
+                  <Font name="Bold Italic Art" size="14.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="76.0" fitWidth="92.0">
-                     <image>
-                        <Image url="@../../../imagenes/editar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="salir" onAction="#salir" prefHeight="72.0" prefWidth="146.0" text="Salir">
-               <font>
-                  <Font name="Tahoma Bold" size="20.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="64.0">
-                     <image>
-                        <Image url="@../../../imagenes/salir.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton onAction="#agregarProducto" text="Agregar">
-               <font>
-                  <Font name="Tahoma Bold" size="20.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="67.0">
-                     <image>
-                        <Image url="@../../../../../../../respaldo/construccion/Materiales%20DeCon/src/imagenes/agregar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
+            </Label>
+            <TableView fx:id="tablaProductos" layoutY="95.0" prefHeight="494.0" prefWidth="1000.0" style="-fx-border-color: #F4FF00;">
+              <columns>
+                <TableColumn fx:id="idCategoria" prefWidth="89.0" style="-fx-background-color: lightblue;" text="ID" />
+                <TableColumn fx:id="nombreProducto" prefWidth="317.0" style="-fx-background-color: lightblue;" text="Nombre" />
+                  <TableColumn fx:id="categoriaProducto" prefWidth="146.0" style="-fx-background-color: lightblue;" text="Categoria" />
+                  <TableColumn fx:id="price" prefWidth="116.0" style="-fx-background-color: lightblue;" text="Precio Unitario" />
+                  <TableColumn fx:id="existencia" prefWidth="96.0" style="-fx-background-color: lightblue;" text="Existencia" />
+                  <TableColumn fx:id="proveedor" prefWidth="235.0" style="-fx-background-color: lightblue;" text="Proveedor" />
+              </columns>
+            </TableView>
+            <HBox layoutX="95.0" layoutY="591.0" prefHeight="94.0" prefWidth="891.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="eliminar" onAction="#iniciar" text="Eliminar">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="62.0" fitWidth="67.0">
+                           <image>
+                              <Image url="@../../../imagenes/eliminar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="modificar" onAction="#showEditView" text="Modificar">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="76.0" fitWidth="92.0">
+                           <image>
+                              <Image url="@../../../imagenes/editar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="salir" onAction="#salir" prefHeight="72.0" prefWidth="146.0" text="Salir">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="64.0">
+                           <image>
+                              <Image url="@../../../imagenes/salir.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#agregarProducto" text="Agregar">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="62.0" fitWidth="67.0">
+                           <image>
+                              <Image url="@../../../imagenes/agregar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <Label layoutX="414.0" layoutY="26.0" text="DeCon">
-         <font>
-            <Font name="Broadway" size="33.0" />
-         </font>
-      </Label>
-      <Label layoutX="386.0" layoutY="48.0" text="Decoración &amp; Construcción ">
-         <font>
-            <Font name="Bold Italic Art" size="14.0" />
-         </font>
-      </Label>
-      <Ellipse fill="#1f93ff00" layoutX="471.0" layoutY="55.0" radiusX="108.0" radiusY="47.0" strokeType="INSIDE">
-         <stroke>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="BLACK" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </stroke>
-      </Ellipse>
+      </AnchorPane>
+      <AnchorPane fx:id="editProductosPane" layoutX="40.0" layoutY="40.0" prefHeight="700.0" prefWidth="1000.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="265.0" layoutY="47.0" prefHeight="44.0" prefWidth="777.0" text="Editar Producto">
+               <font>
+                  <Font name="Arial Black" size="37.0" />
+               </font>
+            </Label>
+            <VBox layoutX="114.0" layoutY="109.0" prefHeight="365.0" prefWidth="680.0" spacing="30.0">
+               <children>
+                  <JFXTextField fx:id="editNombre" prefHeight="64.0" prefWidth="680.0" promptText="Nombre de Producto" />
+                  <JFXTextField fx:id="editPrecio" prefHeight="62.0" prefWidth="680.0" promptText="Precio del Producto" />
+                  <JFXTextField fx:id="editExistencia" prefHeight="71.0" prefWidth="680.0" promptText="Existencia" />
+                  <JFXComboBox fx:id="editCategoria" prefHeight="51.0" prefWidth="694.0" promptText="Categoria" />
+                  <JFXComboBox fx:id="editProveedor" prefHeight="53.0" prefWidth="685.0" promptText="Proveedor" />
+               </children>
+            </VBox>
+            <HBox layoutX="104.0" layoutY="508.0" prefHeight="78.0" prefWidth="635.0" spacing="100.0">
+               <children>
+                  <JFXButton buttonType="RAISED" onAction="#editar" prefHeight="55.0" prefWidth="121.0" ripplerFill="#77bf2b" style="-fx-background-color: #94d49e; -fx-border-radius: 200px;" text="Editar" textOverrun="CLIP" />
+                  <JFXButton onAction="#cancelar" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: coral; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
