@@ -96,6 +96,28 @@ public class PrincipalMenuController implements Initializable{
     
     @FXML
     private Label infoPuesto;
+    //--------------------------------------------------------------------------------------------------------------------------------
+    
+    @FXML
+    private JFXTextField campoId;
+
+    @FXML
+    private JFXTextField campoContactoReferencia;
+
+    @FXML
+    private JFXTextField campoEmpresa;
+
+    @FXML
+    private JFXTextField campoDireccion;
+
+    @FXML
+    private JFXTextField campoTelefono;
+
+    @FXML
+    private JFXTextField campoCodPostal;
+
+    @FXML
+    private JFXTextField campoCiudad;
  
     //static float cantidadInicial= Float.parseFloat(JOptionPane.showInputDialog(null, "Inserte el ingreso del dia: "));
 	static float cantidadInicial = 0;
@@ -105,26 +127,91 @@ public class PrincipalMenuController implements Initializable{
 	
 	 @FXML
 	void registrarUsuario(ActionEvent event) throws SQLException {
-		con = Conexion.getConection();
-		String consulta = "INSERT INTO MaterialesDeCon.dbo.Usuario VALUES ('"+campoNombre.getText()+"','"+campoApellido.getText()+
-							"','"+campoPuesto.getText()+"','"+campoPassword.getText()+"')";
-		ps = con.prepareStatement(consulta);
-    	ps.executeUpdate();
-    	System.out.println(ps);
-    	Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-		alerta.setTitle("CONFIRMACIÓN");
-		alerta.setContentText("El usuario se ha registrado");
-		alerta.initStyle(StageStyle.UTILITY);
-		alerta.setHeaderText(null);
-		alerta.showAndWait();
-		verificarBotones();
-		userPane.setVisible(true);
+		 if(!camposVaciosUser()) {
+			 if(campoPassword.getText().equals(campoPassword2.getText())) {
+				 
+				con = Conexion.getConection();
+				String consulta = "INSERT INTO MaterialesDeCon.dbo.Usuario VALUES ('"+campoNombre.getText()+"','"+campoApellido.getText()+
+										"','"+campoPuesto.getText()+"','"+campoPassword.getText()+"')";
+				
+				ps = con.prepareStatement(consulta);
+			    ps.executeUpdate();
+			    System.out.println(ps);
+			    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+				alerta.setTitle("CONFIRMACIÓN");
+				alerta.setContentText("El usuario se ha registrado");
+				alerta.initStyle(StageStyle.UTILITY);
+				alerta.setHeaderText(null);
+				alerta.showAndWait();
+				verificarBotones();
+				userPane.setVisible(true);
+			 }else {
+				 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+					alerta.setTitle("Advertencia");
+					alerta.setContentText("Las constraseñas no coinciden");
+					alerta.initStyle(StageStyle.UTILITY);
+					alerta.setHeaderText(null);
+					alerta.showAndWait();
+			 }
+		 }
+	}
+	 
+	public boolean camposVaciosUser() {
+		boolean uservacio = false;
+		
+		if(campoNombre.getText().isEmpty() || campoApellido.getText().isEmpty() || campoPuesto.getText().isEmpty() || campoPassword.getText().isEmpty() || campoPassword2.getText().isEmpty()) {
+			uservacio = true;
+			Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("Advertencia");
+			alerta.setContentText("Debes llenar todos los campos");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+		}
+		return uservacio;
 	}
 	 
 	 @FXML
 	void registrarProveedor(ActionEvent event) throws SQLException {
-		 
+		 if(!camposVaciosProveedor()) {
+			 System.out.println("paso todo");
+		    con = Conexion.getConection();
+			String consulta = "INSERT INTO MaterialesDeCon.dbo.Proveerdor VALUES ('"+campoId.getText()+"','"+campoContactoReferencia.getText()+
+									"','"+campoEmpresa.getText()+"','"+campoDireccion.getText()+"','"+campoTelefono.getText()+"',"
+									+ "'"+campoCodPostal.getText()+"','"+campoCiudad.getText()+"')";
+			
+			ps = con.prepareStatement(consulta);
+		    ps.executeUpdate();
+		    System.out.println(ps);
+		    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+			alerta.setTitle("CONFIRMACIÓN");
+			alerta.setContentText("El nuevo proveedor se ha registrado");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+			verificarBotones();
+			provedoresPane.setVisible(true);
+		 }
 	 }
+	 
+	 public boolean camposVaciosProveedor() {
+			boolean proveedorvacio = false;
+			
+			if(campoId.getText().isEmpty() || campoContactoReferencia.getText().isEmpty() || 
+				campoEmpresa.getText().isEmpty() || campoDireccion.getText().isEmpty() || 
+				campoTelefono.getText().isEmpty() || campoCodPostal.getText().isEmpty() || 
+				campoCiudad.getText().isEmpty()) {
+				
+				proveedorvacio = true;
+				Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+				alerta.setTitle("Advertencia");
+				alerta.setContentText("Debes llenar todos los campos");
+				alerta.initStyle(StageStyle.UTILITY);
+				alerta.setHeaderText(null);
+				alerta.showAndWait();
+			}
+			return proveedorvacio;
+		}
 	 
 	 @FXML
 	public void regresar(ActionEvent event) {
@@ -201,8 +288,8 @@ public class PrincipalMenuController implements Initializable{
 	
 	@FXML
 	void cargarVenta(ActionEvent event) {
-		Stage s = (Stage)compra.getScene().getWindow();
-    	s.close();
+		//Stage s = (Stage)compra.getScene().getWindow();
+    	//s.close();
 		main.cargarVenta();
 	}
 	
@@ -256,21 +343,8 @@ public class PrincipalMenuController implements Initializable{
 	public void showUsers() {
 		main.cargarListaUsuarios();
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		TextInputDialog dialog = new TextInputDialog("Cantidad de Efectivo en caja");
-		dialog.setTitle("Espere");
-		dialog.setHeaderText("Por favor introduzca la cantidad de dinero en caja");
-		dialog.setContentText("Cantidad:");
-
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent()){
-		    System.out.println("Cantidad de dinero " + result.get());
-		    cantidadInicial = Float.parseFloat(result.get());
-		}
-
+	
+	public void IniciarTodo() {
 		verificarBotones();
 		acero.setVisible(true);
 		madera.setVisible(true);
@@ -285,5 +359,21 @@ public class PrincipalMenuController implements Initializable{
 		regisUser.setVisible(true);
 		infoUser.setVisible(true);
 		listUser.setVisible(true);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		TextInputDialog dialog = new TextInputDialog("0");
+		dialog.setTitle("Espere");
+		dialog.setHeaderText("Por favor introduzca la cantidad de dinero en caja \nPor Default hay $0");
+		dialog.setContentText("Cantidad:");
+
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+		    System.out.println("Cantidad de dinero " + result.get());
+		    cantidadInicial = Float.parseFloat(result.get());
+		    IniciarTodo();
+		}
 	}
 }

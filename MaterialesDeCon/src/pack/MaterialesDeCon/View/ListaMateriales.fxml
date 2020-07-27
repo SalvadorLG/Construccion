@@ -42,8 +42,8 @@
             </Label>
             <TableView fx:id="tablaProductos" layoutY="95.0" prefHeight="494.0" prefWidth="1000.0" style="-fx-border-color: #F4FF00;">
               <columns>
-                <TableColumn fx:id="idCategoria" prefWidth="89.0" style="-fx-background-color: lightblue;" text="ID" />
-                <TableColumn fx:id="nombreProducto" prefWidth="317.0" style="-fx-background-color: lightblue;" text="Nombre" />
+                <TableColumn fx:id="idCategoria" prefWidth="63.0" style="-fx-background-color: lightblue;" text="ID" />
+                <TableColumn fx:id="nombreProducto" prefWidth="343.0" style="-fx-background-color: lightblue;" text="Nombre" />
                   <TableColumn fx:id="categoriaProducto" prefWidth="146.0" style="-fx-background-color: lightblue;" text="Categoria" />
                   <TableColumn fx:id="price" prefWidth="116.0" style="-fx-background-color: lightblue;" text="Precio Unitario" />
                   <TableColumn fx:id="existencia" prefWidth="96.0" style="-fx-background-color: lightblue;" text="Existencia" />
@@ -52,7 +52,7 @@
             </TableView>
             <HBox layoutX="95.0" layoutY="591.0" prefHeight="94.0" prefWidth="891.0" spacing="20.0">
                <children>
-                  <JFXButton fx:id="eliminar" onAction="#iniciar" text="Eliminar">
+                  <JFXButton fx:id="eliminar" onAction="#eliminar" text="Eliminar">
                      <font>
                         <Font name="Tahoma Bold" size="20.0" />
                      </font>

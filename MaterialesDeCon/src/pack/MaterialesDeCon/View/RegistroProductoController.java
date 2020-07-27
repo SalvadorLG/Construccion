@@ -76,9 +76,25 @@ public class RegistroProductoController implements Initializable{
 		}
 	}
 	
+	public boolean verificarFormulario() {
+		boolean vacios = false;
+		if(nom.getText().isEmpty() || id.getText().isEmpty() || provedor.getSelectionModel().isEmpty() || 
+				ctg.getSelectionModel().isEmpty() || preUni.getText().isEmpty() || extc.getText().isEmpty()) {
+			vacios = true;
+			Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("Advertencia");
+			alerta.setContentText("Debes llenar todos los campos");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+		}
+		return vacios;
+	}
+	
     @FXML
     private void aniadir(ActionEvent event) throws ClassNotFoundException, SQLException {
-    	//System.out.println(ctg.getSelectionModel().getSelectedIndex());
+    	
+    	verificarFormulario();
     	String Proveedor = verificarProveedor(provedor.getValue().getText());
     	String Categoria = verificarCategoria(ctg.getValue().getText());
     	
@@ -142,6 +158,12 @@ public class RegistroProductoController implements Initializable{
 		}else {
 			return "";
 		}
+    }
+    
+    @FXML
+    private void cancelar() {
+    	Stage s = (Stage)cancelar.getScene().getWindow();
+    	s.close();
     }
 
     public void setMain(Main main) {

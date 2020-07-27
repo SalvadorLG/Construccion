@@ -117,6 +117,7 @@ public class ListaUsuariosController {
 				if(newValue != null) {
 					listaUsuarios.clear();
 					listTemp.clear();
+					c = newValue.getIdUsuarioProperty();
 					listTemp.add(newValue.getIdUsuarioProperty());
 					listTemp.add(newValue.getNombreProperty());
 					listTemp.add(newValue.getApellidoPaternoProperty());

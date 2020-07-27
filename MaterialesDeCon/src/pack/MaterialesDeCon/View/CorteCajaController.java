@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import pack.MaterialesDeCon.Main;
 import pack.MaterialesDeCon.Model.Conexion;
 import pack.MaterialesDeCon.Model.OrdenVenta;
@@ -35,7 +36,7 @@ public class CorteCajaController {
     private JFXTextField ingresoDia;
 
     @FXML
-    private JFXTextField totalGanancias;
+    private JFXTextField gananciasdia;
 
     @FXML
     private JFXButton regresar;
@@ -139,7 +140,7 @@ public class CorteCajaController {
 		totGan.setText(Float.toString(gan));
 		
 		totalGanancia= (ingrs+gan);
-		totalGanancias.setText(Float.toString(totalGanancia));
+		gananciasdia.setText(Float.toString(totalGanancia));
 		
     }
     
@@ -148,7 +149,11 @@ public class CorteCajaController {
     	ingresos.setItems(lista);
     }
     
-   
+    @FXML
+	public void salir(ActionEvent event) {
+		Stage s = (Stage)regresar.getScene().getWindow();
+    	s.close();
+	}
     
     public void setMain(Main main) {
  		this.main=main;

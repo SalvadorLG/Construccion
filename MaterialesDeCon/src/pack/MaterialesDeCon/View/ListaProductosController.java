@@ -197,6 +197,7 @@ public class ListaProductosController {
 				if(newValue != null) {
 					listaProductos.clear();
 					listTemp.clear();
+					c = newValue.getIdProductoProperty();
 					listTemp.add(newValue.getIdProductoProperty());
 					listTemp.add(newValue.getNombreoProperty());
 					listTemp.add(newValue.getIdCategoriaProperty());

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
@@ -22,7 +23,7 @@ public class LoginController {
 	private PreparedStatement ps;
 	private ResultSet res;
 	@FXML
-	private Button access;
+	private JFXButton access;
 	@FXML
 	private JFXTextField user;
 	@FXML
@@ -31,17 +32,35 @@ public class LoginController {
 	
 	@FXML
 	void cagarMenu(ActionEvent event) throws SQLException{
-		if(VerificarUser()) {
-			main.loadMenu(idUsuario, name, apellido, puesto);
-		}else {
-			   Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+		if(!RevisarCampos()) {
+			if(VerificarUser()) {
+				main.loadMenu(idUsuario, name, apellido, puesto);
+			}else {
+				Alert alerta = new Alert(Alert.AlertType.INFORMATION);
 				alerta.setTitle("Advertencia");
-				alerta.setContentText("Contraseña, usuario o cantidad igresada no valida");
+				alerta.setContentText("El usuario o contraseña no son validas");
 				alerta.initStyle(StageStyle.UTILITY);
 				alerta.setHeaderText(null);
 				alerta.showAndWait();
-		   }
+			}
+		}
 	}
+	
+	private boolean RevisarCampos() {
+		boolean CampoVacio = false;
+		
+		if(user.getText().isEmpty() || password.getText().isEmpty()) {
+			CampoVacio = true;
+			Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("Advertencia");
+			alerta.setContentText("Debes llenar todos los campos");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+		}
+		return CampoVacio;
+	}
+	
 	private boolean VerificarUser() throws SQLException {
 		boolean verificar = false;
 		System.out.println(user.getText());
@@ -51,9 +70,7 @@ public class LoginController {
 			ps = con.prepareStatement("SELECT * FROM dbo.Usuario WHERE nombre ='" + user.getText()+"'");
 			res = ps.executeQuery();
 			while (res.next()) {
-				//System.out.println(res.next());
 				String password = res.getString("password");
-				System.out.println(password);
 				if(passwordIngresado.equals(password)) {
 					idUsuario = res.getString("idUsuario");
 					name = res.getString("nombre");

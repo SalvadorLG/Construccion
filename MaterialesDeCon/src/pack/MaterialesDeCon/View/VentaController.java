@@ -18,11 +18,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pack.MaterialesDeCon.Main;
 import pack.MaterialesDeCon.Model.Conexion;
 import pack.MaterialesDeCon.Model.Producto;
@@ -47,6 +49,9 @@ public class VentaController {
 
     @FXML
     private JFXButton agregar;
+    
+    @FXML
+    private JFXButton salir;
 
     @FXML
     private JFXTextField cantidad;
@@ -79,11 +84,13 @@ public class VentaController {
     static String va, name;
     float preUni=0;
     int contador=0;
-    static float subTotal=0;
+    public static float subTotal=0;
     float montoIva=0;
     float price=0;
     String nom=null;
+    int cantidadactual= 0;
     int cant=0;
+    boolean comprarealizada = false; 
     @FXML
     public void initialize() throws SQLException {
 		query();
@@ -123,45 +130,85 @@ public class VentaController {
 					va= newValue.getIdProductoProperty();
 					preUni=newValue.getPrecioUnitarioProperty();
 					nom=newValue.getNombreoProperty();
+					cantidadactual=newValue.getExistenciaProperty();
 			}
 		});
     }
     
+    private void disminuirInvetario() throws SQLException{
+    	int dis = cantidadactual-cant;
+    	String query = "update dbo.Producto set existencia = '"+String.valueOf(dis)+"' where nombreProducto = '"+nomVenta.getText()+"'";
+    	conn = con.getConection();
+		Statement st = conn.createStatement();
+		st.executeUpdate(query);
+    }
+    
+    public boolean verificarProductoSeleccionado() {
+    	boolean vacios = false;
+    	if(nomVenta.getText().isEmpty() || identificador.getText().isEmpty()){
+    		vacios = true;
+			Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("Advertencia");
+			alerta.setContentText("No has seleccionado ningun producto");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+    	}
+    	
+    	return vacios;
+    }
+    
+    public boolean verificarCantidadIngresada() {
+    	boolean vacios = false;
+    	if(cantidad.getText().isEmpty()) {
+    		vacios=true;
+    		Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("Advertencia");
+			alerta.setContentText("No has agregado una cantidad");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
+    	}
+    	return vacios;
+    }
     
 	 public void agregarProducto(ActionEvent even) throws SQLException{
-	    	cant= Integer.parseInt(cantidad.getText());
-	    	price= preUni*cant;
-	    	Venta ventita = new Venta(nomVenta.getText(), cant, price, va);
-	    	canasta.add(ventita);
-	
-	        subTotal+=price;
-
-	    	
-	    	total.setText(Float.toString(subTotal));
-	    	contador++;
-	    	carito.setText(Integer.toString(contador));
-	    	
-	    	String consulta="INSERT INTO MaterialesDeCon.dbo.VentaDetalle(precio,cantidad,nombreProducto)" + "values (?,?,?)";
-	    	 try {
-				conn = con.getConection();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				System.out.println("no se pudo");
-			}
-	    	try {
-	    		PreparedStatement a = conn.prepareStatement(consulta);
-	    		a.setFloat(1, preUni);
-	    		a.setInt(2, cant);
-	    		a.setString(3, nom);
-	    		
-	    		
-	    		a.execute();
-	    		System.out.println("si pude");
-	    	}catch(Exception e) {
-	    		System.out.println("no se puso perro");
-	    	}
-	    	
+		 if(!verificarProductoSeleccionado()) {
+			 if(!verificarCantidadIngresada()) {
+				 comprarealizada = true;
+				 cant= Integer.parseInt(cantidad.getText());
+			    	price= preUni*cant;
+			    	Venta ventita = new Venta(nomVenta.getText(), cant, price, va);
+			    	canasta.add(ventita);
+			
+			        subTotal+=price;
+			        System.out.println(subTotal);
+			    	
+			    	total.setText(Float.toString(subTotal));
+			    	contador++;
+			    	carito.setText(Integer.toString(contador));
+			    	
+			    	String consulta="INSERT INTO MaterialesDeCon.dbo.VentaDetalle(precio,cantidad,nombreProducto)" + "values (?,?,?)";
+			    	 try {
+						conn = con.getConection();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						System.out.println("no se pudo");
+					}
+			    	try {
+			    		PreparedStatement a = conn.prepareStatement(consulta);
+			    		a.setFloat(1, preUni);
+			    		a.setInt(2, cant);
+			    		a.setString(3, nom);
+			    		a.execute();
+			    		System.out.println("si pude");
+			    	}catch(Exception e) {
+			    		System.out.println("no se puso perro");
+			    	}
+			    	disminuirInvetario();
+			 }
+		 }
 	  }
 	    
 	 public static ObservableList<Venta> carrito(){
@@ -170,18 +217,29 @@ public class VentaController {
 	 
 	 @FXML
 		void cargarPagoEfec(ActionEvent event) {
-		 	Stage s = (Stage)finalizar.getScene().getWindow();
-	    	s.close();
-			main.cagarPago();
+		 	//Stage s = (Stage)finalizar.getScene().getWindow();
+	    	//s.close();
+		 if(comprarealizada) {
+			 main.cagarPago(); 
+		 }else {
+			 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+				alerta.setTitle("Advertencia");
+				alerta.setContentText("No has agregado ningun producto");
+				alerta.initStyle(StageStyle.UTILITY);
+				alerta.setHeaderText(null);
+				alerta.showAndWait();
+		 }
 		}
 	    
 	  public static Float prePago(){
 	    	return subTotal;
 	  }
 	    
-	    	
-    
-
+  @FXML
+    private void salir() {
+    	Stage s = (Stage)salir.getScene().getWindow();
+    	s.close();
+    }
     
     public void setMain(Main main) {
 		this.main=main;

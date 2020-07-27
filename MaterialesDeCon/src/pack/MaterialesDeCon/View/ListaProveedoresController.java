@@ -144,6 +144,7 @@ public class ListaProveedoresController {
 				if(newValue != null) {
 					listaProveedores.clear();
 					listTemp.clear();
+					c = newValue.getIdProveedorProperty();
 					listTemp.add(newValue.getIdProveedorProperty());
 					listTemp.add(newValue.getContactoReferenciaProperty());
 					listTemp.add(newValue.getNombreEmpresaProperty());

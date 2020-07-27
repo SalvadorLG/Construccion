@@ -57,7 +57,7 @@
                         </JFXTextField>
                      </children>
                   </VBox>
-                  <VBox layoutX="37.0" layoutY="314.0" spacing="45.0">
+                  <VBox layoutX="37.0" layoutY="244.0" spacing="30.0">
                      <children>
                         <JFXTextField fx:id="total" disable="true" layoutX="76.0" layoutY="584.0" promptText="Sub Total:">
                            <font>
@@ -78,6 +78,15 @@
                               <ImageView fitHeight="54.0" fitWidth="59.0">
                                  <image>
                                     <Image url="@../../../imagenes/guardar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="salir" onAction="#salir" text="Salir">
+                           <graphic>
+                              <ImageView fitHeight="54.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../imagenes/salir.png" />
                                  </image>
                               </ImageView>
                            </graphic>

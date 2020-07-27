@@ -15,10 +15,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pack.MaterialesDeCon.Main;
 import pack.MaterialesDeCon.Model.Conexion;
 import pack.MaterialesDeCon.Model.Venta;
@@ -155,7 +157,22 @@ public class OrdenPedidoController {
     public void agregar() {
     	tablaTicket.setItems(VentaController.carrito());
 	}
-    
+    @FXML
+    public void finalizarVenta() {
+    	Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+		alerta.setTitle("Compta realizada");
+		alerta.setContentText("El ticket se ha guardado");
+		alerta.initStyle(StageStyle.UTILITY);
+		alerta.setHeaderText(null);
+		alerta.showAndWait();
+		cerrar();
+		
+    }
+   
+    public void cerrar() {
+    	Stage s = (Stage)guardar.getScene().getWindow();
+    	s.close();
+    }
     @FXML
     /*public void cargarMenu(ActionEvent e) {
     	VentaController.carrito().clear();

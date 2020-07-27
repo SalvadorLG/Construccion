@@ -1,5 +1,7 @@
 package pack.MaterialesDeCon.View;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXButton;
@@ -25,13 +27,18 @@ public class PagoController {
     static float total;
     Main main;
     
-    @FXML
-    public void pago(ActionEvent e) {
+    public void initialize(){
     	float price= VentaController.prePago();
     	float monto= (float) (price*0.16);
     	 total= price+monto;
-    	
+    	System.out.println("Total: "+ total);
+    	System.out.println("Static: "+ VentaController.subTotal);
     	tot.setText(Float.toString(total));
+    }
+    
+    @FXML
+    public void pago(ActionEvent e) {
+    	
     	recibir= Float.parseFloat(efectivo.getText());
     	
     	

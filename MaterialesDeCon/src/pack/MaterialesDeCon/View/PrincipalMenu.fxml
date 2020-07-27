@@ -224,7 +224,7 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton fx:id="azulejo" contentDisplay="TOP" onDragDetected="#cagarListaMateriales" text="Azulejo" GridPane.rowIndex="1">
+                              <JFXButton fx:id="azulejo" contentDisplay="TOP" onAction="#cagarListaMateriales" text="Azulejo" GridPane.rowIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="133.0" fitWidth="179.0">
                                        <image>
@@ -389,7 +389,7 @@
                         <HBox layoutX="108.0" layoutY="549.0" prefHeight="86.0" prefWidth="432.0" spacing="100.0">
                            <children>
                               <JFXButton buttonType="RAISED" onAction="#registrarProveedor" prefHeight="55.0" prefWidth="121.0" ripplerFill="#77bf2b" style="-fx-background-color: #94d49e; -fx-border-radius: 200px;" text="Registrar" textOverrun="CLIP" />
-                              <JFXButton prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: coral; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
+                              <JFXButton onAction="#cagarProveedores" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: coral; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
                            </children>
                         </HBox>
                      </children>
