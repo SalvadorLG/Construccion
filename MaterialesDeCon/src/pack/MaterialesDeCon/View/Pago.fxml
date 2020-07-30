@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: A9DFBF; -fx-background-radius: 50;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.PagoController">
+<AnchorPane prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: F1F7FF; -fx-background-radius: 50;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.PagoController">
    <children>
       <Label layoutX="65.0" layoutY="100.0" text="Paga con:">
          <font>
@@ -21,12 +21,12 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="siguiente" contentDisplay="RIGHT" layoutX="322.0" layoutY="144.0" onAction="#pago" text="Siguiente">
+      <JFXButton fx:id="siguiente" contentDisplay="RIGHT" layoutX="322.0" layoutY="144.0" onAction="#pago" text="Generar Ticket">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
          <graphic>
-            <ImageView>
+            <ImageView fitHeight="51.0" fitWidth="49.0">
                <image>
                   <Image url="@../../../imagenes/next.png" />
                </image>

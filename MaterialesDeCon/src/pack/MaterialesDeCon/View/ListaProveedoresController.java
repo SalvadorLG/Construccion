@@ -207,6 +207,13 @@ public class ListaProveedoresController {
 			editTelefonoEmpresa.setText(date05);
 			editCodigo.setText(date06);
 			editCiudad.setText(date07);
+		}else {
+			Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("");
+			alerta.setContentText("No ha seleccionado un Proveedor");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
 		}
 	}
 	

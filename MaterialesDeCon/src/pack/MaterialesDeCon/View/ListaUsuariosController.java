@@ -167,6 +167,13 @@ public class ListaUsuariosController {
 			editNombre.setText(date02);
 			editApellidos.setText(date03);
 			editPuesto.setText(date04);
+		}else {
+			Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+			alerta.setTitle("");
+			alerta.setContentText("No ha seleccionado un Usuario");
+			alerta.initStyle(StageStyle.UTILITY);
+			alerta.setHeaderText(null);
+			alerta.showAndWait();
 		}
 	}
 	

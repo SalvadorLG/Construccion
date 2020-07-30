@@ -18,9 +18,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pack.MaterialesDeCon.View.ListaProductosController">
    <children>
-      <AnchorPane fx:id="materialesPane" layoutY="8.0">
+      <AnchorPane fx:id="materialesPane" layoutY="-4.0" prefHeight="706.0" prefWidth="1000.0" style="-fx-background-color: F1F7FF;">
          <children>
-            <Ellipse fill="#1f93ff00" layoutX="467.0" layoutY="40.0" radiusX="108.0" radiusY="47.0" strokeType="INSIDE">
+            <Ellipse fill="#1f93ff00" layoutX="471.0" layoutY="50.0" radiusX="108.0" radiusY="42.0" strokeType="INSIDE">
                <stroke>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -35,19 +35,19 @@
                   <Font name="Broadway" size="33.0" />
                </font>
             </Label>
-            <Label layoutX="386.0" layoutY="40.0" text="Decoración &amp; Construcción ">
+            <Label layoutX="384.0" layoutY="47.0" text="Decoración &amp; Construcción ">
                <font>
                   <Font name="Bold Italic Art" size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="tablaProductos" layoutY="95.0" prefHeight="494.0" prefWidth="1000.0" style="-fx-border-color: #F4FF00;">
+            <TableView fx:id="tablaProductos" layoutY="95.0" prefHeight="494.0" prefWidth="1000.0" style="-fx-border-color: black; -fx-background-color: FFFF2C;">
               <columns>
-                <TableColumn fx:id="idCategoria" prefWidth="63.0" style="-fx-background-color: lightblue;" text="ID" />
-                <TableColumn fx:id="nombreProducto" prefWidth="343.0" style="-fx-background-color: lightblue;" text="Nombre" />
-                  <TableColumn fx:id="categoriaProducto" prefWidth="146.0" style="-fx-background-color: lightblue;" text="Categoria" />
-                  <TableColumn fx:id="price" prefWidth="116.0" style="-fx-background-color: lightblue;" text="Precio Unitario" />
-                  <TableColumn fx:id="existencia" prefWidth="96.0" style="-fx-background-color: lightblue;" text="Existencia" />
-                  <TableColumn fx:id="proveedor" prefWidth="235.0" style="-fx-background-color: lightblue;" text="Proveedor" />
+                <TableColumn fx:id="idCategoria" prefWidth="63.0" style="-fx-background-color: ADFFCE; -fx-border-color: black;" text="ID" />
+                <TableColumn fx:id="nombreProducto" prefWidth="343.0" style="-fx-background-color: ADFFCE; -fx-border-color: black;" text="Nombre" />
+                  <TableColumn fx:id="categoriaProducto" prefWidth="146.0" style="-fx-background-color: ADFFCE; -fx-border-color: black;" text="Categoria" />
+                  <TableColumn fx:id="price" prefWidth="116.0" style="-fx-background-color: ADFFCE; -fx-border-color: black;" text="Precio Unitario" />
+                  <TableColumn fx:id="existencia" prefWidth="96.0" style="-fx-background-color: ADFFCE; -fx-border-color: black;" text="Existencia" />
+                  <TableColumn fx:id="proveedor" prefWidth="235.0" style="-fx-background-color: ADFFCE; -fx-border-color: black;" text="Proveedor" />
               </columns>
             </TableView>
             <HBox layoutX="95.0" layoutY="591.0" prefHeight="94.0" prefWidth="891.0" spacing="20.0">
@@ -69,7 +69,7 @@
                         <Font name="Tahoma Bold" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="76.0" fitWidth="92.0">
+                        <ImageView fitHeight="63.0" fitWidth="71.0">
                            <image>
                               <Image url="@../../../imagenes/editar.png" />
                            </image>
@@ -104,28 +104,62 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="editProductosPane" layoutX="40.0" layoutY="40.0" prefHeight="700.0" prefWidth="1000.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="editProductosPane" layoutX="40.0" layoutY="40.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: F1F7FF;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="265.0" layoutY="47.0" prefHeight="44.0" prefWidth="777.0" text="Editar Producto">
+            <Label layoutX="342.0" layoutY="52.0" prefHeight="55.0" prefWidth="318.0" style="-fx-background-color: FFFF2C;" text="Editar Producto">
                <font>
                   <Font name="Arial Black" size="37.0" />
                </font>
             </Label>
-            <VBox layoutX="114.0" layoutY="109.0" prefHeight="365.0" prefWidth="680.0" spacing="30.0">
+            <VBox layoutX="247.0" layoutY="168.0" prefHeight="365.0" prefWidth="538.0" spacing="30.0">
                <children>
-                  <JFXTextField fx:id="editNombre" prefHeight="64.0" prefWidth="680.0" promptText="Nombre de Producto" />
-                  <JFXTextField fx:id="editPrecio" prefHeight="62.0" prefWidth="680.0" promptText="Precio del Producto" />
-                  <JFXTextField fx:id="editExistencia" prefHeight="71.0" prefWidth="680.0" promptText="Existencia" />
-                  <JFXComboBox fx:id="editCategoria" prefHeight="51.0" prefWidth="694.0" promptText="Categoria" />
-                  <JFXComboBox fx:id="editProveedor" prefHeight="53.0" prefWidth="685.0" promptText="Proveedor" />
+                  <JFXTextField fx:id="editNombre" prefHeight="50.0" prefWidth="680.0" promptText="Nombre de Producto" />
+                  <HBox prefHeight="55.0" prefWidth="538.0">
+                     <children>
+                        <JFXTextField fx:id="editPrecio" prefHeight="50.0" prefWidth="121.0" promptText="Precio del Producto" />
+                        <Label prefHeight="35.0" prefWidth="300.0" text="                       Existencia:" translateY="10.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="editExistencia" prefHeight="50.0" prefWidth="129.0" promptText="Existencia" />
+                     </children>
+                  </HBox>
+                  <JFXComboBox fx:id="editCategoria" prefHeight="50.0" prefWidth="694.0" promptText="Categoria" />
+                  <JFXComboBox fx:id="editProveedor" prefHeight="50.0" prefWidth="685.0" promptText="Proveedor" />
                </children>
             </VBox>
-            <HBox layoutX="104.0" layoutY="508.0" prefHeight="78.0" prefWidth="635.0" spacing="100.0">
+            <HBox layoutX="329.0" layoutY="533.0" prefHeight="78.0" prefWidth="343.0" spacing="100.0">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#editar" prefHeight="55.0" prefWidth="121.0" ripplerFill="#77bf2b" style="-fx-background-color: #94d49e; -fx-border-radius: 200px;" text="Editar" textOverrun="CLIP" />
-                  <JFXButton onAction="#cancelar" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: coral; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
+                  <JFXButton buttonType="RAISED" onAction="#editar" prefHeight="55.0" prefWidth="121.0" ripplerFill="#bfff7b" style="-fx-background-color: #73FF7E; -fx-border-radius: 200px;" text="Editar" textOverrun="CLIP" />
+                  <JFXButton onAction="#cancelar" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: #FF4842; -fx-border-radius: 200px 200px 200px 200px;" text="Cancelar" />
                </children>
             </HBox>
+            <Label layoutX="125.0" layoutY="179.0" text="Producto:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="125.0" layoutY="258.0" text="Precio:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="123.0" layoutY="336.0" text="Categoria:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="120.0" layoutY="416.0" text="Proveedor:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="234.0" layoutY="252.0" text="\$">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

@@ -289,8 +289,15 @@ public class ListaProductosController {
 			 
 			 inx = ProveedorDefault(date06);
 			 editProveedor.getSelectionModel().select(inx);
-		 
 		 }
+		 else {
+				Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+				alerta.setTitle("");
+				alerta.setContentText("No ha seleccionado un Producto");
+				alerta.initStyle(StageStyle.UTILITY);
+				alerta.setHeaderText(null);
+				alerta.showAndWait();
+			}
 	 }
 	 
 	 private int CategoriaDefault(String date03) {

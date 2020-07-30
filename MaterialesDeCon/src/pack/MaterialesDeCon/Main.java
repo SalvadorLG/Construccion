@@ -18,6 +18,7 @@ import pack.MaterialesDeCon.View.PagoController;
 import pack.MaterialesDeCon.View.PrincipalMenuController;
 import pack.MaterialesDeCon.View.RegistroProductoController;
 import pack.MaterialesDeCon.View.VentaController;
+import pack.MaterialesDeCon.View.ListaTicketsController;
  
 
 public class Main extends Application {
@@ -31,6 +32,7 @@ public class Main extends Application {
 	Stage verOrdenPedido=new Stage();
 	Stage verPago= new Stage();
 	Stage listaUsuarios = new Stage();
+	Stage tickets= new Stage();
 	public static String categoria = "";
 	public static String nick = "", pass = "";
 	public static String idUsuario = "", name = "", puesto = "", apellido = "";
@@ -98,22 +100,6 @@ public class Main extends Application {
 		}
 	}
 	
-	/*public void cagarEditarProducto() {
-		try {
-			FXMLLoader loader= new FXMLLoader(Main.class.getResource("View/EditarProducto.fxml"));
-			AnchorPane root=(AnchorPane)loader.load();
-			Scene scene= new Scene(root);
-			EditarProductoController controlador= loader.getController();
-			controlador.setMain(this);
-			registroProductos.setScene(scene);
-			registroProductos.show();
-			
-			
-		} catch  (IOException e) {
-			e.printStackTrace();
-		}
-	}*/	
-	
 	public void cargarListaProveedores() {
 		try {
 			FXMLLoader loader= new FXMLLoader(Main.class.getResource("View/ListaProveedores.fxml"));
@@ -144,7 +130,22 @@ public class Main extends Application {
 			
 		} catch  (IOException e) {
 			e.printStackTrace();
+		}
 	}
+	
+	public void cargarListaTickets() {
+		try {
+			FXMLLoader loader= new FXMLLoader(Main.class.getResource("View/ListaTickets.fxml"));
+			AnchorPane root=(AnchorPane)loader.load();
+			Scene scene= new Scene(root);
+			ListaTicketsController controlador= loader.getController();
+			controlador.setMain(this);
+			tickets.setScene(scene);
+			tickets.show();
+
+		} catch  (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void cargarListaUsuarios() {
